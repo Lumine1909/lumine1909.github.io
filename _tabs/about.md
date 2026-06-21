@@ -25,6 +25,7 @@ order: 4
 * [**NoPacketBan**](https://github.com/Lumine1909/NoPacketBan): A Paper (Bukkit) plugin that prevent player from being packet kicked.
 * [**OfflineEncryptor**](https://github.com/Lumine1909/OfflineEncryptor): A Paper (Bukkit) plugin that provides encryption for offline players.
 * [**SVSM**](https://github.com/Lumine1909/SVSM): A plugin that can keep your server and server connections alive while using suspend IDEA breakpoints.
+
 ---
 
 #### 📫 Contact
@@ -38,8 +39,8 @@ order: 4
 
 ![Lumine1909's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Lumine1909&show_icons=true&theme=dark)
 
-------
-<details>
+---
+<details markdown="1">
   <summary>🌟 Check out one of my favorite projects...</summary>
 
 ### [Reflexion](https://github.com/Lumine1909/Reflexion)
@@ -48,5 +49,5 @@ A "fast" and "powerful" lightweight Java reflection library.
 
 </details>
 
-
+---
 

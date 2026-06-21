@@ -16,7 +16,7 @@ timezone:
 
 title: Lumine1909 # the main title
 
-tagline: A Minecraft developer focused on protocol, registry systems, and utility tools. # it will display as the subtitle
+tagline: mov ax, 4c00; int 21; # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A Minecraft developer focused on protocol, registry systems, and utility tools.
