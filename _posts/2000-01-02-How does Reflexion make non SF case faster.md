@@ -164,7 +164,7 @@ final class MethodHolder$$Lambda implements Supplier {
     }
 }
 ```
-So when calling `get`, it will use the generated synthetic method to access the static final MethodHandle, so that the invocation becomes more amenable to inlining and JIT optimization.
+So when calling `get`, it will use the generated synthetic method to access the static final MethodHandle, so that the invocation becomes more amenable to inlining and JIT optimization. The lambda actually exposes a constant-producing method.
 
 These codes exploit static final fields combined with trivially inlined lambda accessors. As a result, the wrapper call chain is fully inlined and collapsed, leaving the MethodHandle invocation in a more optimized execution context with reduced surrounding overhead.
 
