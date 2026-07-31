@@ -5,7 +5,7 @@ date: 2000-01-02 00:00:00 +0000
 categories: [General]
 ---
 
-In my project [Reflexion](https://github.com/Lumine1909/Reflexion), non static final [Method](https://github.com/Lumine1909/Reflexion/blob/master/src/main/java/io/github/lumine1909/reflexion/Method.java) shows lower overhead than [MethodHandle](https://docs.oracle.com/en/java/javase/25/docs/api/index.html) in this specific benchmark:
+In my project [Reflexion](https://github.com/Lumine1909/Reflexion), non static final [Method](https://github.com/Lumine1909/Reflexion/blob/main/src/main/java/io/github/lumine1909/reflexion/Method.java) shows lower overhead than [MethodHandle](https://docs.oracle.com/en/java/javase/25/docs/api/index.html) in this specific benchmark:
 
 | Benchmark          | Mode | Cnt | Score  | Error  | Units |
 |--------------------|------|-----|--------|--------|-------|
@@ -98,7 +98,7 @@ public class Benchmark {
 
 This blog is written to explain why this can happen.
 
-Everything start [here](https://github.com/Lumine1909/Reflexion/blob/master/src/main/java/io/github/lumine1909/reflexion/internal/MethodHolder.java)
+Everything start [here](https://github.com/Lumine1909/Reflexion/blob/main/src/main/java/io/github/lumine1909/reflexion/internal/MethodHolder.java):
 ```java
 package io.github.lumine1909.reflexion.internal;
 
@@ -142,13 +142,13 @@ Using `javap -c -p -v MethodHolder.class`, we can find something like this:
       LineNumberTable:
         line 12: 0
 ```
-Which looks like this in java code
+Which looks like this in Java code:
 ```java
 private static /*synthetic*/ Object lambda$static$0() {
     return MethodHolder.o0;
 }
 ```
-And by adding VM option `-Djdk.invoke.LambdaMetafactory.dumpProxyClassFiles`, we can find the generated lambda class
+And by adding VM option `-Djdk.invoke.LambdaMetafactory.dumpProxyClassFiles`, we can find the generated lambda class:
 ```java
 package io.github.lumine1909.reflexion.internal;
 
