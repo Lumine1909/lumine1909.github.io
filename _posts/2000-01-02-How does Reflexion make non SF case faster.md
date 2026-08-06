@@ -2,7 +2,7 @@
 layout: post
 title: "How does Reflexion make non SF case faster"
 date: 2000-01-02 00:00:00 +0000
-categories: [General]
+categories: [Reflexion]
 ---
 
 In my project [Reflexion](https://github.com/Lumine1909/Reflexion), non static final [Method](https://github.com/Lumine1909/Reflexion/blob/main/src/main/java/io/github/lumine1909/reflexion/Method.java) shows lower overhead than [MethodHandle](https://docs.oracle.com/en/java/javase/25/docs/api/index.html) in this specific benchmark:

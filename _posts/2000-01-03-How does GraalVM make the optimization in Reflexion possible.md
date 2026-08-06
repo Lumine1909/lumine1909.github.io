@@ -2,7 +2,7 @@
 layout: post
 title: "How does GraalVM make the optimization in Reflexion possible"
 date: 2000-01-03 00:00:00 +0000
-categories: [General]
+categories: [Reflexion]
 ---
 
 My [previous article](../../posts/How-does-Reflexion-make-non-SF-case-faster/) explained how Reflexion implements this optimization. In this article, I'll explain how GraalVM makes that optimization possible.
