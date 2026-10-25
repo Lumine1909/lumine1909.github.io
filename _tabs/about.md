@@ -6,7 +6,7 @@ order: 4
 
 ### Hi there, I'm Lumine1909! 👋
 
-💼 I'm a Minecraft developer focused on protocol, registry systems, and utility tools.
+💼 I'm a Java developer focused on internal, performance, and Minecraft (protocol, registry system, utility tools).
 
 🧠 Feel free to reach out if you have questions about anything related!
 
