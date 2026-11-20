@@ -1,0 +1,353 @@
+=========================== JVMCI-compiled nmethod =============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (JVMCI) 409 1060       4       io.github.lumine1909.Benchmark::customCall (18 bytes)
+ total in heap  [0x00000155d2a34188,0x00000155d2a34498] = 784
+ main code      [0x00000155d2a34280,0x00000155d2a34462] = 482
+ stub code      [0x00000155d2a34462,0x00000155d2a34468] = 6
+ oops           [0x00000155d2a34468,0x00000155d2a34498] = 48
+ mutable data [0x00000155e7682080,0x00000155e7682158] = 216
+ relocation     [0x00000155e7682080,0x00000155e76820a8] = 40
+ metadata       [0x00000155e76820a8,0x00000155e7682140] = 152
+ JVMCI data     [0x00000155e7682140,0x00000155e7682158] = 24
+ immutable data [0x00000155e7ba41f0,0x00000155e7ba43e8] = 504
+ dependencies   [0x00000155e7ba41f0,0x00000155e7ba4218] = 40
+ nul chk table  [0x00000155e7ba4218,0x00000155e7ba4230] = 24
+ scopes pcs     [0x00000155e7ba4230,0x00000155e7ba42d0] = 160
+ scopes data    [0x00000155e7ba42d0,0x00000155e7ba4308] = 56
+ speculations   [0x00000155e7ba4308,0x00000155e7ba43e8] = 224
+
+[Disassembly]
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Instructions begin]
+  0x00000155d2a34280:   data16 data16 nop WORD PTR [rax+rax*1+0x0]
+  0x00000155d2a3428b:   data16 data16 xchg ax,ax
+  0x00000155d2a3428f:   data16 xchg ax,ax
+[Entry Point]
+  # {method} {0x00000155e845c2e0} 'customCall' '()Ljava/lang/String;' in 'io/github/lumine1909/Benchmark'
+  #           [sp+0x40]  (sp of caller)
+  0x00000155d2a34292:   mov    r10d,DWORD PTR [rdx+0x8]
+  0x00000155d2a34296:   cmp    r10d,DWORD PTR [rax+0x8]
+  0x00000155d2a3429a:   jne    0x00000155d227ece0           ;   {runtime_call Shared Runtime ic_miss_blob}
+[Verified Entry Point]
+  0x00000155d2a342a0:   mov    DWORD PTR [rsp-0x8000],eax
+  0x00000155d2a342a7:   sub    rsp,0x38
+  0x00000155d2a342ab:   nop
+  0x00000155d2a342ac:   cmp    DWORD PTR [r15+0x20],0x0
+  0x00000155d2a342b4:   jne    0x00000155d2a343c7
+  0x00000155d2a342ba:   mov    QWORD PTR [rsp+0x30],rbp
+  0x00000155d2a342bf:   movabs rax,0x62c30d478              ;   {oop(a 'java/lang/Class'{0x000000062c30d478} = 'io/github/lumine1909/Benchmark')}
+  0x00000155d2a342c9:   mov    eax,DWORD PTR [rax+0xac]     ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+  0x00000155d2a342cf:   mov    eax,DWORD PTR [r12+rax*8+0x20]; implicit exception: dispatches to 0x00000155d2a34406
+                                                            ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+  0x00000155d2a342d4:   cmp    DWORD PTR [r12+rax*8+0x8],0x1084450
+                                                            ; implicit exception: dispatches to 0x00000155d2a34429
+                                                            ;   {metadata('io/github/lumine1909/reflexion/internal/MethodUtil$$Lambda+0x0000000029084450')}
+  0x00000155d2a342dd:   jne    0x00000155d2a343a4
+  0x00000155d2a342e3:   movabs rax,0x62be2c908              ;   {oop(a 'io/github/lumine1909/Benchmark$A'{0x000000062be2c908})}
+  0x00000155d2a342ed:   cmp    BYTE PTR [r15+0x48],0x0
+  0x00000155d2a342f2:   je     0x00000155d2a34326
+  0x00000155d2a342f8:   mov    r11d,DWORD PTR [rax+0x10]
+  0x00000155d2a342fc:   shl    r11,0x3
+  0x00000155d2a34300:   test   r11,r11
+  0x00000155d2a34303:   je     0x00000155d2a34326
+  0x00000155d2a34309:   mov    r10,QWORD PTR [r15+0x38]
+  0x00000155d2a3430d:   cmp    r10,0x0
+  0x00000155d2a34311:   je     0x00000155d2a343d7
+  0x00000155d2a34317:   sub    r10,0x8
+  0x00000155d2a3431b:   mov    QWORD PTR [r15+0x38],r10
+  0x00000155d2a3431f:   add    r10,QWORD PTR [r15+0x40]
+  0x00000155d2a34323:   mov    QWORD PTR [r10],r11
+  0x00000155d2a34326:   mov    DWORD PTR [rax+0x10],0xc57c5924;   {oop("42"{0x000000062be2c920})}
+  0x00000155d2a3432d:   movabs r10,0x62be2c920              ;   {oop("42"{0x000000062be2c920})}
+  0x00000155d2a34337:   mov    r11,rax
+  0x00000155d2a3433a:   xor    r11,r10
+  0x00000155d2a3433d:   shr    r11,0x16
+  0x00000155d2a34341:   je     0x00000155d2a3438d
+  0x00000155d2a34347:   mov    r11,rax
+  0x00000155d2a3434a:   shr    r11,0x9
+  0x00000155d2a3434e:   movabs r8,0x155d85e4000
+  0x00000155d2a34358:   add    r11,r8
+  0x00000155d2a3435b:   cmp    BYTE PTR [r11],0x2
+  0x00000155d2a3435f:   je     0x00000155d2a3438d
+  0x00000155d2a34361:   lock add DWORD PTR [rsp-0x40],0x0
+  0x00000155d2a34367:   cmp    BYTE PTR [r11],0x0
+  0x00000155d2a3436b:   je     0x00000155d2a3438d
+  0x00000155d2a3436d:   mov    BYTE PTR [r11],0x0
+  0x00000155d2a34371:   mov    r8,QWORD PTR [r15+0x50]
+  0x00000155d2a34375:   test   r8,r8
+  0x00000155d2a34378:   je     0x00000155d2a343e6
+  0x00000155d2a3437e:   sub    r8,0x8
+  0x00000155d2a34382:   mov    QWORD PTR [r15+0x50],r8
+  0x00000155d2a34386:   add    r8,QWORD PTR [r15+0x58]
+  0x00000155d2a3438a:   mov    QWORD PTR [r8],r11           ;*putfield value {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - io.github.lumine1909.Benchmark$A::call@3 (line 31)
+                                                            ; - java.lang.invoke.LambdaForm$DMH/0x000000002908c000::invokeVirtual@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000002908cc00::invoke@56
+                                                            ; - java.lang.invoke.Invokers$Holder::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.reflexion.Method::invoke@14 (line 150)
+                                                            ; - io.github.lumine1909.Benchmark::customCall@11 (line 170)
+  0x00000155d2a3438d:   mov    rax,r10
+  0x00000155d2a34390:   mov    rbp,QWORD PTR [rsp+0x30]
+  0x00000155d2a34395:   add    rsp,0x38
+  0x00000155d2a34399:   cmp    rsp,QWORD PTR [r15+0x28]     ;   {poll_return}
+  0x00000155d2a3439d:   ja     0x00000155d2a343f2
+  0x00000155d2a343a3:   ret                                 ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - io.github.lumine1909.Benchmark::customCall@17 (line 170)
+  0x00000155d2a343a4:   mov    DWORD PTR [r15+0x508],0xffffffcd;*invokevirtual invoke {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - io.github.lumine1909.Benchmark::customCall@11 (line 170)
+  0x00000155d2a343af:   mov    QWORD PTR [r15+0x510],0x794
+  0x00000155d2a343ba:   call   0x00000155d2283d82           ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000155d2a343bf:   nop    DWORD PTR [rax+rax*1+0x0]
+  0x00000155d2a343c7:   mov    QWORD PTR [rsp+0x30],rbp
+  0x00000155d2a343cc:   call   Stub::method_entry_barrier   ;   {runtime_call Stub::method_entry_barrier}
+  0x00000155d2a343d1:   jmp    0x00000155d2a342ba
+  0x00000155d2a343d6:   hlt    
+  0x00000155d2a343d7:   mov    QWORD PTR [rsp],r11
+  0x00000155d2a343db:   call   0x00000155d25ae5e0           ;   {runtime_call Stub<write_barrier_pre-stack-only(Object)void>}
+  0x00000155d2a343e0:   jmp    0x00000155d2a34326
+  0x00000155d2a343e5:   hlt    
+  0x00000155d2a343e6:   mov    QWORD PTR [rsp],r11
+  0x00000155d2a343ea:   call   0x00000155d25ae8e0           ;   {runtime_call Stub<write_barrier_post-stack-only(Word)void>}
+  0x00000155d2a343ef:   jmp    0x00000155d2a3438d
+  0x00000155d2a343f1:   hlt    
+  0x00000155d2a343f2:   lea    rcx,[rip+0xffffffffffffffa0]        # 0x00000155d2a34399
+  0x00000155d2a343f9:   mov    QWORD PTR [r15+0x4e0],rcx
+  0x00000155d2a34400:   jmp    0x00000155d2282260           ;   {runtime_call SafepointBlob}
+  0x00000155d2a34405:   hlt    
+  0x00000155d2a34406:   mov    DWORD PTR [r15+0x508],0xfffffff5
+  0x00000155d2a34411:   mov    QWORD PTR [r15+0x510],0x0
+  0x00000155d2a3441c:   call   0x00000155d2283d82           ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000155d2a34421:   nop    DWORD PTR [rax+rax*1+0x0]
+  0x00000155d2a34429:   mov    DWORD PTR [r15+0x508],0xffffffcd
+  0x00000155d2a34434:   mov    QWORD PTR [r15+0x510],0x794
+  0x00000155d2a3443f:   call   0x00000155d2283d82           ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000155d2a34444:   nop    DWORD PTR [rax+rax*1+0x0]
+[Exception Handler]
+  0x00000155d2a3444c:   call   0x00000155d2378860           ;   {runtime_call Stub<ExceptionHandlerStub.exceptionHandler>}
+  0x00000155d2a34451:   hlt    
+[Deopt Handler Code]
+  0x00000155d2a34452:   call   0x00000155d2a34457
+  0x00000155d2a34457:   sub    QWORD PTR [rsp],0x5
+  0x00000155d2a3445c:   jmp    0x00000155d2283860           ;   {runtime_call DeoptimizationBlob}
+  0x00000155d2a34461:   hlt    
+[Stub Code]
+  0x00000155d2a34462:   hlt    
+  0x00000155d2a34463:   hlt    
+  0x00000155d2a34464:   hlt    
+  0x00000155d2a34465:   hlt    
+  0x00000155d2a34466:   hlt    
+  0x00000155d2a34467:   hlt    
+--------------------------------------------------------------------------------
+
+
+=========================== JVMCI-compiled nmethod =============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (JVMCI) 242 1039       4       io.github.lumine1909.Benchmark::mhCall (12 bytes)
+ total in heap  [0x00000292b16e1f88,0x00000292b16e22d8] = 848
+ main code      [0x00000292b16e2080,0x00000292b16e2288] = 520
+ stub code      [0x00000292b16e2288,0x00000292b16e22b8] = 48
+ oops           [0x00000292b16e22b8,0x00000292b16e22d8] = 32
+ mutable data [0x000002928064b190,0x000002928064b230] = 160
+ relocation     [0x000002928064b190,0x000002928064b1e8] = 88
+ metadata       [0x000002928064b1e8,0x000002928064b218] = 48
+ JVMCI data     [0x000002928064b218,0x000002928064b230] = 24
+ immutable data [0x00000292c68e0780,0x00000292c68e0980] = 512
+ dependencies   [0x00000292c68e0780,0x00000292c68e0790] = 16
+ nul chk table  [0x00000292c68e0790,0x00000292c68e07b0] = 32
+ scopes pcs     [0x00000292c68e07b0,0x00000292c68e08f0] = 320
+ scopes data    [0x00000292c68e08f0,0x00000292c68e0958] = 104
+ speculations   [0x00000292c68e0958,0x00000292c68e0980] = 40
+
+[Disassembly]
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Instructions begin]
+  0x00000292b16e2080:   data16 data16 nop WORD PTR [rax+rax*1+0x0]
+  0x00000292b16e208b:   data16 data16 xchg ax,ax
+  0x00000292b16e208f:   data16 xchg ax,ax
+[Entry Point]
+  # {method} {0x00000292c745c330} 'mhCall' '()Ljava/lang/String;' in 'io/github/lumine1909/Benchmark'
+  #           [sp+0x50]  (sp of caller)
+  0x00000292b16e2092:   mov    r10d,DWORD PTR [rdx+0x8]
+  0x00000292b16e2096:   cmp    r10d,DWORD PTR [rax+0x8]
+  0x00000292b16e209a:   jne    0x00000292b0f2ece0           ;   {runtime_call Shared Runtime ic_miss_blob}
+[Verified Entry Point]
+  0x00000292b16e20a0:   mov    DWORD PTR [rsp-0x8000],eax
+  0x00000292b16e20a7:   sub    rsp,0x48
+  0x00000292b16e20ab:   nop
+  0x00000292b16e20ac:   cmp    DWORD PTR [r15+0x20],0x0
+  0x00000292b16e20b4:   jne    0x00000292b16e21bd
+  0x00000292b16e20ba:   mov    QWORD PTR [rsp+0x40],rbp
+  0x00000292b16e20bf:   movabs rdx,0x62c30aa38              ;   {oop(a 'java/lang/Class'{0x000000062c30aa38} = 'io/github/lumine1909/Benchmark')}
+  0x00000292b16e20c9:   mov    edx,DWORD PTR [rdx+0x88]     ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+  0x00000292b16e20cf:   cmp    DWORD PTR [r12+rdx*8+0x8],0x206808; implicit exception: dispatches to 0x00000292b16e21f5
+                                                            ;   {metadata('java/lang/invoke/DirectMethodHandle')}
+  0x00000292b16e20d8:   jne    0x00000292b16e21af           ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+  0x00000292b16e20de:   mov    r8d,DWORD PTR [r12+rdx*8+0x14]; implicit exception: dispatches to 0x00000292b16e2218
+                                                            ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+  0x00000292b16e20e3:   mov    r8d,DWORD PTR [r12+r8*8+0x1c]; implicit exception: dispatches to 0x00000292b16e223b
+  0x00000292b16e20e8:   cmp    DWORD PTR [r12+rdx*8+0x10],0xc5713307
+                                                            ;   {oop(a 'java/lang/invoke/MethodType'{0x000000062b899838} = (Lio/github/lumine1909/Benchmark$A;I)Ljava/lang/String;)}
+  0x00000292b16e20f1:   jne    0x00000292b16e2188           ;*if_acmpeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@7 (line 530)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@10
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e20f7:   shl    rdx,0x3
+  0x00000292b16e20fb:   movabs r10,0x62be2c7f0              ;   {oop(a 'io/github/lumine1909/Benchmark$A'{0x000000062be2c7f0})}
+  0x00000292b16e2105:   test   r8d,r8d
+  0x00000292b16e2108:   je     0x00000292b16e2138           ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@15 (line 625)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@14
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e210e:   mov    r8,r10                       ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e2111:   mov    r9d,0x2a
+  0x00000292b16e2117:   call   0x00000292b0f2f1e0           ; ImmutableOopMap {}
+                                                            ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+                                                            ;   {optimized virtual_call}
+  0x00000292b16e211c:   nop    DWORD PTR [rax+rax*1+0x3000194];   {post_call_nop}
+  0x00000292b16e2124:   mov    rbp,QWORD PTR [rsp+0x40]
+  0x00000292b16e2129:   add    rsp,0x48
+  0x00000292b16e212d:   cmp    rsp,QWORD PTR [r15+0x28]     ;   {poll_return}
+  0x00000292b16e2131:   ja     0x00000292b16e21cd
+  0x00000292b16e2137:   ret                                 ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@15 (line 625)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@14
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e2138:   mov    QWORD PTR [rsp+0x30],r10
+  0x00000292b16e213d:   mov    r11,rdx
+  0x00000292b16e2140:   mov    QWORD PTR [rsp+0x28],r11
+  0x00000292b16e2145:   xchg   ax,ax
+  0x00000292b16e2147:   call   0x00000292b0f2fbe0           ; ImmutableOopMap {[40]=Oop [48]=Oop }
+                                                            ;*invokestatic maybeCustomize {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@19 (line 626)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@14
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+                                                            ;   {static_call}
+  0x00000292b16e214c:   nop    DWORD PTR [rax+rax*1+0x40001c4];   {post_call_nop}
+  0x00000292b16e2154:   mov    rdx,QWORD PTR [rsp+0x28]
+  0x00000292b16e2159:   mov    r8,QWORD PTR [rsp+0x30]
+  0x00000292b16e215e:   mov    r9d,0x2a                     ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e2164:   data16 xchg ax,ax
+  0x00000292b16e2167:   call   0x00000292b0f2f1e0           ; ImmutableOopMap {}
+                                                            ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+                                                            ;   {optimized virtual_call}
+  0x00000292b16e216c:   nop    DWORD PTR [rax+rax*1+0x50001e4];   {post_call_nop}
+  0x00000292b16e2174:   mov    rbp,QWORD PTR [rsp+0x40]
+  0x00000292b16e2179:   add    rsp,0x48
+  0x00000292b16e217d:   cmp    rsp,QWORD PTR [r15+0x28]     ;   {poll_return}
+  0x00000292b16e2181:   ja     0x00000292b16e21e1
+  0x00000292b16e2187:   ret                                 ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@11 (line 140)
+  0x00000292b16e2188:   mov    r11d,0x294
+  0x00000292b16e218e:   mov    r10d,0xffffffed
+  0x00000292b16e2194:   mov    DWORD PTR [r15+0x508],r10d   ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@1
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e219b:   mov    QWORD PTR [r15+0x510],r11
+  0x00000292b16e21a2:   call   0x00000292b0f33d82           ; ImmutableOopMap {}
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e21a7:   nop    DWORD PTR [rax+rax*1+0x0]
+  0x00000292b16e21af:   mov    r11d,0x14
+  0x00000292b16e21b5:   mov    r10d,0xffffffcd
+  0x00000292b16e21bb:   jmp    0x00000292b16e2194           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@1
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e21bd:   mov    QWORD PTR [rsp+0x40],rbp
+  0x00000292b16e21c2:   call   Stub::method_entry_barrier   ;   {runtime_call Stub::method_entry_barrier}
+  0x00000292b16e21c7:   jmp    0x00000292b16e20ba
+  0x00000292b16e21cc:   hlt    
+  0x00000292b16e21cd:   lea    rcx,[rip+0xffffffffffffff59]        # 0x00000292b16e212d
+  0x00000292b16e21d4:   mov    QWORD PTR [r15+0x4e0],rcx
+  0x00000292b16e21db:   jmp    0x00000292b0f32260           ;   {runtime_call SafepointBlob}
+  0x00000292b16e21e0:   hlt    
+  0x00000292b16e21e1:   lea    rcx,[rip+0xffffffffffffff95]        # 0x00000292b16e217d
+  0x00000292b16e21e8:   mov    QWORD PTR [r15+0x4e0],rcx
+  0x00000292b16e21ef:   jmp    0x00000292b0f32260           ;   {runtime_call SafepointBlob}
+  0x00000292b16e21f4:   hlt    
+  0x00000292b16e21f5:   mov    DWORD PTR [r15+0x508],0xffffffcd
+  0x00000292b16e2200:   mov    QWORD PTR [r15+0x510],0x14
+  0x00000292b16e220b:   call   0x00000292b0f33d82           ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e2210:   nop    DWORD PTR [rax+rax*1+0x0]
+  0x00000292b16e2218:   mov    DWORD PTR [r15+0x508],0xfffffff5
+  0x00000292b16e2223:   mov    QWORD PTR [r15+0x510],0x0
+  0x00000292b16e222e:   call   0x00000292b0f33d82           ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e2233:   nop    DWORD PTR [rax+rax*1+0x0]
+  0x00000292b16e223b:   mov    DWORD PTR [r15+0x508],0xfffffff5
+  0x00000292b16e2246:   mov    QWORD PTR [r15+0x510],0x0
+  0x00000292b16e2251:   call   0x00000292b0f33d82           ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+                                                            ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e2256:   nop    DWORD PTR [rax+rax*1+0x0]
+[Exception Handler]
+  0x00000292b16e225e:   call   0x00000292b125be60           ;   {runtime_call Stub<ExceptionHandlerStub.exceptionHandler>}
+  0x00000292b16e2263:   hlt    
+[Deopt Handler Code]
+  0x00000292b16e2264:   call   0x00000292b16e2269
+  0x00000292b16e2269:   sub    QWORD PTR [rsp],0x5
+  0x00000292b16e226e:   jmp    0x00000292b0f33860           ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e2273:   hlt    
+[Deopt MH Handler Code]
+  0x00000292b16e2274:   call   0x00000292b16e2279
+  0x00000292b16e2279:   sub    QWORD PTR [rsp],0x5
+  0x00000292b16e227e:   jmp    0x00000292b0f33860           ;   {runtime_call DeoptimizationBlob}
+  0x00000292b16e2283:   hlt    
+  0x00000292b16e2284:   hlt    
+  0x00000292b16e2285:   hlt    
+  0x00000292b16e2286:   hlt    
+  0x00000292b16e2287:   hlt    
+[Stub Code]
+  0x00000292b16e2288:   movabs rbx,0x0                      ;   {static_stub}
+  0x00000292b16e2292:   jmp    0x00000292b16e2292           ;   {runtime_call nmethod}
+  0x00000292b16e2297:   movabs rbx,0x0                      ;   {static_stub}
+  0x00000292b16e22a1:   jmp    0x00000292b16e22a1           ;   {runtime_call nmethod}
+  0x00000292b16e22a6:   movabs rbx,0x0                      ;   {static_stub}
+  0x00000292b16e22b0:   jmp    0x00000292b16e22b0           ;   {runtime_call nmethod}
+  0x00000292b16e22b5:   hlt    
+  0x00000292b16e22b6:   hlt    
+  0x00000292b16e22b7:   hlt    
+--------------------------------------------------------------------------------

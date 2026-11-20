@@ -22,77 +22,89 @@ Using a compiler directives file:
 ]
 ```
 And run the benchmark with the following VM options:
-`-XX:+UnlockDiagnosticVMOptions -XX:PrintAssemblyOptions=intel -XX:CompilerDirectivesFile=directives.json -XX:+LogVMOutput -XX:-DisplayVMOutput -XX:LogFile=asm.log`, we can find the [generated assembly code](../../assets/raw/output_jvmci.txt).
+`-XX:+UnlockDiagnosticVMOptions -XX:PrintAssemblyOptions=intel -XX:CompilerDirectivesFile=directives.json -XX:+LogVMOutput -XX:-DisplayVMOutput -XX:LogFile=asm.log`, we can find the [generated assembly code](../../assets/raw/jvmci_output.txt).
 
-For [Reflexion custom call](https://github.com/Lumine1909/Reflexion/blob/main/benchmark/src/main/java/io/github/lumine1909/reflexion/Benchmark.java#L160), the remaining work is simply checking if the cached object is the expected lambda class and the `noInstance` field is false after optimization.
+For [Reflexion custom call](https://github.com/Lumine1909/Reflexion/blob/main/benchmark/src/main/java/io/github/lumine1909/reflexion/Benchmark.java#L160), the remaining work is simply checking if the cached object is the expected lambda class after optimization.
 ```text
-// Load the compressed oop.
-  0x00000209a30a6710:   mov    ebx,DWORD PTR [r9+0xac]      ; ImmutableOopMap {rdx=Oop rbx=NarrowOop r8=Oop r9=Oop r10=Oop r11=Oop [40]=Oop [48]=Oop [56]=Oop }
-                                                            ;*aload {reexecute=1 rethrow=0 return_oop=0}
-                                                            ; - (reexecute) io.github.lumine1909.jmh_generated.Benchmark_customCall_jmhTest::customCall_avgt_jmhStub@13 (line 190)
-// Read a boolean, the noInstance field.                                                            
-  0x00000209a30a6717:   mov    edi,DWORD PTR [r12+rbx*8+0x24]; implicit exception: dispatches to 0x00000209a30a74e8
-  0x00000209a30a671c:   movsx  ebx,BYTE PTR [r12+rbx*8+0x14]; ImmutableOopMap {rdx=Oop r8=Oop r9=Oop r10=Oop r11=Oop [40]=Oop [48]=Oop [56]=Oop }
-                                                            ;*aload {reexecute=1 rethrow=0 return_oop=0}
-                                                            ; - (reexecute) io.github.lumine1909.jmh_generated.Benchmark_customCall_jmhTest::customCall_avgt_jmhStub@13 (line 190)
-// Compare the object's Klass pointer, check if that object is a specific Lambda class.
-  0x00000209a30a6722:   cmp    DWORD PTR [r12+rdi*8+0x8],0x105f170
-                                                            ; implicit exception: dispatches to 0x00000209a30a750d
-                                                            ;   {metadata('io/github/lumine1909/reflexion/internal/MethodHolder$$Lambda+0x000000001905f170')}
-  0x00000209a30a672b:   jne    0x00000209a30a7225           ;*invokeinterface get {reexecute=0 rethrow=0 return_oop=0}
-                                                            ; - io.github.lumine1909.reflexion.Method::invoke@11 (line 141)
-                                                            ; - io.github.lumine1909.Benchmark::customCall@11 (line 169)
-                                                            ; - io.github.lumine1909.jmh_generated.Benchmark_customCall_jmhTest::customCall_avgt_jmhStub@17 (line 190)
-// Check if field noInstance is false (the method is a virtual method).                                                            
-  0x00000209a30a6731:   test   bl,bl
-  0x00000209a30a6733:   jne    0x00000209a30a71fe           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                            ; - io.github.lumine1909.reflexion.Method::invoke@31 (line 142)
-                                                            ; - io.github.lumine1909.Benchmark::customCall@11 (line 169)
-                                                            ; - io.github.lumine1909.jmh_generated.Benchmark_customCall_jmhTest::customCall_avgt_jmhStub@17 (line 190)
-// GC related things.
-  0x00000209a30a6739:   cmp    BYTE PTR [r15+0x48],0x0
-  0x00000209a30a673e:   xchg   ax,ax
-  0x00000209a30a6740:   je     0x00000209a30a6775
-  0x00000209a30a6746:   mov    edi,DWORD PTR [r11+0xc]
-  0x00000209a30a674a:   shl    rdi,0x3
-  0x00000209a30a674e:   test   rdi,rdi
-  0x00000209a30a6751:   je     0x00000209a30a6775
-  0x00000209a30a6757:   mov    rbx,QWORD PTR [r15+0x38]
-  0x00000209a30a675b:   cmp    rbx,0x0
-  0x00000209a30a675f:   nop
-  0x00000209a30a6760:   je     0x00000209a30a732f
-  0x00000209a30a6766:   sub    rbx,0x8
-  0x00000209a30a676a:   mov    QWORD PTR [r15+0x38],rbx
-  0x00000209a30a676e:   add    rbx,QWORD PTR [r15+0x40]
-  0x00000209a30a6772:   mov    QWORD PTR [rbx],rdi
+// Load the benchmark class.
+  0x00000155d2a342bf:   movabs rax,0x62c30d478              ;   {oop(a 'java/lang/Class'{0x000000062c30d478} = 'io/github/lumine1909/Benchmark')}
+// Read the compressed oop of field.
+  0x00000155d2a342c9:   mov    eax,DWORD PTR [rax+0xac]     ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+// Compare the object's Klass pointer, check if the object is the expected lambda class. 
+  0x00000155d2a342cf:   mov    eax,DWORD PTR [r12+rax*8+0x20]; implicit exception: dispatches to 0x00000155d2a34406
+                                                            ; ImmutableOopMap {}
+                                                            ;*getstatic custom$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::customCall@0 (line 170)
+  0x00000155d2a342d4:   cmp    DWORD PTR [r12+rax*8+0x8],0x1084450
+                                                            ; implicit exception: dispatches to 0x00000155d2a34429
+                                                            ;   {metadata('io/github/lumine1909/reflexion/internal/MethodUtil$$Lambda+0x0000000029084450')}
+  0x00000155d2a342dd:   jne    0x00000155d2a343a4
+// Load the instance.
+  0x00000155d2a342e3:   movabs rax,0x62be2c908              ;   {oop(a 'io/github/lumine1909/Benchmark$A'{0x000000062be2c908})}
+// GC related things, normally do jump.
+  0x00000155d2a342ed:   cmp    BYTE PTR [r15+0x48],0x0
+  0x00000155d2a342f2:   je     0x00000155d2a34326
+  0x00000155d2a342f8:   mov    r11d,DWORD PTR [rax+0x10]
+  0x00000155d2a342fc:   shl    r11,0x3
+  0x00000155d2a34300:   test   r11,r11
+  0x00000155d2a34303:   je     0x00000155d2a34326
+  0x00000155d2a34309:   mov    r10,QWORD PTR [r15+0x38]
+  0x00000155d2a3430d:   cmp    r10,0x0
+  0x00000155d2a34311:   je     0x00000155d2a343d7
+  0x00000155d2a34317:   sub    r10,0x8
+  0x00000155d2a3431b:   mov    QWORD PTR [r15+0x38],r10
+  0x00000155d2a3431f:   add    r10,QWORD PTR [r15+0x40]
+  0x00000155d2a34323:   mov    QWORD PTR [r10],r11
 // What the target method actually does (set a String field to "42").
-  0x00000209a30a6775:   mov    DWORD PTR [r11+0xc],0xe2585d69;   {oop("42"{0x0000000712c2eb48})}
+  0x00000155d2a34326:   mov    DWORD PTR [rax+0x10],0xc57c5924;   {oop("42"{0x000000062be2c920})}
 ```
 
 In contrast, [mhCall](https://github.com/Lumine1909/Reflexion/blob/main/benchmark/src/main/java/io/github/lumine1909/reflexion/Benchmark.java#L194) (MethodHandle invokeExact) is not fully inlined.
 ```text
-// Try further inlining.
-  0x0000023e70856e6f:   call   0x0000023e7024f3e0           ; ImmutableOopMap {[32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop [72]=Oop [80]=Oop }
-                                                            ;*invokestatic maybeCustomize {reexecute=0 rethrow=0 return_oop=0}
-                                                            ; - java.lang.invoke.Invokers::checkCustomized@19 (line 626)
-                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000035095400::invokeExact_MT@14
-                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 139)
-                                                            ; - io.github.lumine1909.jmh_generated.Benchmark_mhCall_jmhTest::mhCall_avgt_jmhStub@17 (line 190)
-                                                            ;   {static_call}
-  0x0000023e70856e74:   nop    DWORD PTR [rax+rax*1+0x2800076c];   {post_call_nop}
-  0x0000023e70856e7c:   mov    rdx,QWORD PTR [rsp+0x20]
-  0x0000023e70856e81:   mov    r8,QWORD PTR [rsp+0x30]
+// Load the benchmark class.
+  0x00000292b16e20bf:   movabs rdx,0x62c30aa38              ;   {oop(a 'java/lang/Class'{0x000000062c30aa38} = 'io/github/lumine1909/Benchmark')}
+// Read the compressed oop of field.
+  0x00000292b16e20c9:   mov    edx,DWORD PTR [rdx+0x88]     ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+// Compare the object's Klass pointer, check if the object is the expected method handle. 
+  0x00000292b16e20cf:   cmp    DWORD PTR [r12+rdx*8+0x8],0x206808; implicit exception: dispatches to 0x00000292b16e21f5
+                                                            ;   {metadata('java/lang/invoke/DirectMethodHandle')}
+  0x00000292b16e20d8:   jne    0x00000292b16e21af           ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+// Check if the method type is expected.
+  0x00000292b16e20de:   mov    r8d,DWORD PTR [r12+rdx*8+0x14]; implicit exception: dispatches to 0x00000292b16e2218
+                                                            ; ImmutableOopMap {rdx=NarrowOop }
+                                                            ;*getstatic mh$call {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) io.github.lumine1909.Benchmark::mhCall@0 (line 140)
+  0x00000292b16e20e3:   mov    r8d,DWORD PTR [r12+r8*8+0x1c]; implicit exception: dispatches to 0x00000292b16e223b
+  0x00000292b16e20e8:   cmp    DWORD PTR [r12+rdx*8+0x10],0xc5713307
+                                                            ;   {oop(a 'java/lang/invoke/MethodType'{0x000000062b899838} = (Lio/github/lumine1909/Benchmark$A;I)Ljava/lang/String;)}
+  0x00000292b16e20f1:   jne    0x00000292b16e2188           ;*if_acmpeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@7 (line 530)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@10
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e20f7:   shl    rdx,0x3
+// Load the instance.
+  0x00000292b16e20fb:   movabs r10,0x62be2c7f0              ;   {oop(a 'io/github/lumine1909/Benchmark$A'{0x000000062be2c7f0})}
+// Check if the method handle is customized.
+  0x00000292b16e2105:   test   r8d,r8d
+  0x00000292b16e2108:   je     0x00000292b16e2138           ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@15 (line 625)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@14
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e210e:   mov    r8,r10                       ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
+  0x00000292b16e2111:   mov    r9d,0x2a
 // MethodHandle call the target through invokeBasic, resulting an additional overhead.
-  0x0000023e70856e86:   mov    r9d,0x2a                     ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
-                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000035095400::invokeExact_MT@20
-                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 139)
-                                                            ; - io.github.lumine1909.jmh_generated.Benchmark_mhCall_jmhTest::mhCall_avgt_jmhStub@17 (line 190)
-  0x0000023e70856e8c:   data16 xchg ax,ax
-  0x0000023e70856e8f:   call   0x0000023e7024ede0           ; ImmutableOopMap {[40]=Oop [48]=Oop [56]=Oop [64]=Oop [72]=Oop [80]=Oop }
+  0x00000292b16e2117:   call   0x00000292b0f2f1e0           ; ImmutableOopMap {}
                                                             ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=1}
-                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000035095400::invokeExact_MT@20
-                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 139)
-                                                            ; - io.github.lumine1909.jmh_generated.Benchmark_mhCall_jmhTest::mhCall_avgt_jmhStub@17 (line 190)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000009808cc00::invokeExact_MT@20
+                                                            ; - io.github.lumine1909.Benchmark::mhCall@8 (line 140)
                                                             ;   {optimized virtual_call}
 ```
-The generated machine code shows that Graal Compiler completely inlines [Reflexion's Method](https://github.com/Lumine1909/Reflexion/blob/main/src/main/java/io/github/lumine1909/reflexion/Method.java) invocation, while the `MethodHandle` still goes through `invokeBasic`. This difference is consistent with the benchmark results from the previous article.
+The generated machine code shows that Graal JIT compiler completely inlines [Reflexion's Method](https://github.com/Lumine1909/Reflexion/blob/main/src/main/java/io/github/lumine1909/reflexion/Method.java) invocation, while the `MethodHandle` still goes through `invokeBasic`. This is the reason why Reflexion's version is faster as the benchmark results from the previous article shows.
